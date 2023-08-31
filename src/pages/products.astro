@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from 'astro:assets';
+import Product from "@components/product-feature.astro";
+
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+
+// Filter team entries with 'draft: false' & date before current date
+const features = await getCollection("product", ({ data }) => {
+  return !data.draft ;
+});
+---
+
+<Layout title="Products">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Products</Fragment>
+      <Fragment slot="desc">Delivering value products is our passion. We are committed to the education space to make a difference.</Fragment>
+    </Sectionhead>
+
+
+    <div class="mt-10">
+      {
+        features.map(({data: {title, description, image, color}}, i) => (
+        <Product {title} {description} image={image}  {color} flip={i%2} />
+
+        ))
+      }
+    </div>
+  </Container>
+</Layout>

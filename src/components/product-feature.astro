@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import Link from "@components/ui/link.astro";
+import { Icon } from "astro-icon";
+const { title, description, flip=false, image, cta, color } = Astro.props;
+---
+
+<section
+  class={`grid  lg:grid-cols-2 place-items-center gap-8 pt-16 pb-8 md:pt-12 md:pb-24 ${color} rounded-sm p-5 md:p-10 xl:p-20`} >
+  <div class={`py-6  ${flip? 'order-last' : null}`}>
+    <Image
+      src={image.src}
+      alt={image.alt}
+      width="600"
+      height="400"
+      loading="eager"
+      format="avif"
+      class="rounded-lg"
+    />
+  </div>
+  <div>
+    <h1
+      class="text-xl lg:text-2xl xl:text-3xl font-bold lg:tracking-tight xl:tracking-tighter">
+      {title}
+    </h1>
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      {description}
+    </p>
+    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+     {cta && <Link
+        href="#"
+        style="outline"
+        target="_blank"
+        class="flex gap-1 items-center justify-center"
+        rel="noopener">
+        <Icon class="text-white w-5 h-5" name="bx:bxs-cloud-download" />
+
+       Know more
+      </Link> }
+    </div>
+  </div>
+</section>

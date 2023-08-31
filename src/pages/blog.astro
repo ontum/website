@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import { Picture } from "@astrojs/image/components";
+import { Image } from 'astro:assets';
+
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
@@ -25,17 +26,18 @@ publishedBlogEntries.sort(function (a, b) {
       </Fragment>
     </Sectionhead>
     <main class="mt-16">
-      <ul class="grid gap-16 max-w-4xl mx-auto">
+      <ul class="grid gap-16 max-w-5xl mx-auto">
         {
           publishedBlogEntries.map((blogPostEntry, index) => (
             <li>
               <a href={`/blog/${blogPostEntry.slug}`}>
                 <div class="grid md:grid-cols-2 gap-5 md:gap-10 items-center">
-                  <Picture
+                  <Image
                     src={blogPostEntry.data.image.src}
                     alt={blogPostEntry.data.image.alt}
                     sizes="(max-width: 800px) 100vw, 800px"
-                    widths={[200, 400, 800]}
+                    width={430}
+                    height={240}
                     aspectRatio="16:9"
                     background="#ffffff"
                     fit="cover"
