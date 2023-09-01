@@ -46,11 +46,134 @@ const menuitems = [
 ];
 ---
 
+<script>
+  const navInit = () => {
+    // Mobile nav toggle
+    const menuButton = document.getElementById("astronav-menu");
+    menuButton && menuButton.addEventListener("click", toggleMobileNav);
+
+    // Dropdown menus
+    const dropdownMenus = document.querySelectorAll(".astronav-dropdown");
+    dropdownMenus.forEach((menu) => {
+      const button = menu.querySelector("button");
+      button &&
+        button.addEventListener("click", (event) =>
+          toggleDropdownMenu(event, menu, dropdownMenus)
+        );
+
+      // Handle Submenu Dropdowns
+      const dropDownSubmenus = menu.querySelectorAll(
+        ".astronav-dropdown-submenu"
+      );
+
+      dropDownSubmenus.forEach((submenu) => {
+        const submenuButton = submenu.querySelector("button");
+        submenuButton &&
+          submenuButton.addEventListener("click", (event) => {
+            event.stopImmediatePropagation();
+            console.log("click");
+            toggleSubmenuDropdown(event, submenu);
+          });
+      });
+    });
+
+    // Clicking away from dropdown will remove the dropdown class
+    document.addEventListener("click", closeAllDropdowns);
+
+    function toggleMobileNav() {
+      [...document.querySelectorAll(".astronav-toggle")].forEach((el) => {
+        el.classList.toggle("hidden");
+      });
+    }
+
+    function toggleDropdownMenu(event, menu, dropdownMenus) {
+      toggleMenu(menu);
+
+      // Close one dropdown when selecting another
+      Array.from(dropdownMenus)
+        .filter((el) => el !== menu && !menu.contains(el))
+        .forEach(closeMenu);
+
+      event.stopPropagation();
+    }
+
+    function toggleSubmenuDropdown(event, submenu) {
+      event.stopPropagation();
+      toggleMenu(submenu);
+
+      // Close sibling submenus at the same nesting level
+      const siblingSubmenus = submenu
+        .closest(".astronav-dropdown")
+        .querySelectorAll(".astronav-dropdown-submenu");
+      Array.from(siblingSubmenus)
+        .filter((el) => el !== submenu && !submenu.contains(el))
+        .forEach(closeMenu);
+    }
+
+    function closeAllDropdowns(event) {
+      const dropdownMenus = document.querySelectorAll(".dropdown-toggle");
+      const dropdownParent = document.querySelectorAll(
+        ".astronav-dropdown, .astronav-dropdown-submenu"
+      );
+      const isButtonInsideDropdown = [
+        ...document.querySelectorAll(
+          ".astronav-dropdown button, .astronav-dropdown-submenu button, #astronav-menu"
+        ),
+      ].some((button) => button.contains(event.target));
+      if (!isButtonInsideDropdown) {
+        dropdownMenus.forEach((d) => {
+          // if (!d.contains(event.target)) {
+          d.classList.remove("open");
+          d.removeAttribute("open");
+          d.classList.add("hidden");
+          // }
+        });
+        dropdownParent.forEach((d) => {
+          d.classList.remove("open");
+          d.removeAttribute("open");
+          d.setAttribute("aria-expanded", "false");
+        });
+      }
+    }
+
+    function toggleMenu(menu) {
+      menu.classList.toggle("open");
+      const expanded = menu.getAttribute("aria-expanded") === "true";
+      menu.setAttribute("aria-expanded", expanded ? "false" : "true");
+      menu.hasAttribute("open")
+        ? menu.removeAttribute("open")
+        : menu.setAttribute("open", "");
+
+      const dropdownToggle = menu.querySelector(".dropdown-toggle");
+      const dropdownExpanded = dropdownToggle.getAttribute("aria-expanded");
+      dropdownToggle.classList.toggle("hidden");
+      dropdownToggle.setAttribute(
+        "aria-expanded",
+        dropdownExpanded === "true" ? "false" : "true"
+      );
+    }
+
+    function closeMenu(menu) {
+      console.log("closing", menu);
+      menu.classList.remove("open");
+      menu.removeAttribute("open");
+      menu.setAttribute("aria-expanded", "false");
+      const dropdownToggles = menu.querySelectorAll(".dropdown-toggle");
+      dropdownToggles.forEach((toggle) => {
+        toggle.classList.add("hidden");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    }
+  };
+
+  document.addEventListener("astro:after-swap", navInit);
+</script>
+
 <Container>
-  <div class="w-full flex justify-center">
+  <div class="w-full flex justify-center" id="viewNavBar">
     <header class="bg-white fixed shadow-sm rounded-lg w-full md:px-10 z-[500]">
       <div class="flex flex-col lg:flex-row justify-between items-center p-5">
-        <Astronav>
+        <Astronav client:load transition:persist>
           <div class="flex w-full lg:w-auto items-center justify-between">
             <a href="/" class="text-lg flex">
               <Image
@@ -68,10 +191,13 @@ const menuitems = [
               </div>
             </a>
             <div class="block lg:hidden">
-              <MenuIcon class="w-4 h-4 text-gray-800" transition:persist />
+              <MenuIcon class="w-4 h-4 text-gray-800" />
             </div>
           </div>
-          <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
+          <MenuItems
+            transition:persist
+            class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0"
+          >
             <ul class="flex flex-col lg:flex-row lg:gap-3">
               {
                 menuitems.map((item, index) => (
@@ -123,9 +249,9 @@ const menuitems = [
         </Astronav>
         <div>
           <div class="hidden lg:flex items-center gap-4">
-            <a href="https://app.ontum.co" target="_blank" rel="noopener"
-              >Log in</a
-            >
+            <a href="https://app.ontum.co" target="_blank" rel="noopener">
+              Log in
+            </a>
             <Link
               href="https://app.ontum.co"
               target="_blank"
