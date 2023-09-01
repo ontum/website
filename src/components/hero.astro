@@ -1,12 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import heroImage from "../assets/hero.png";
+import { Image } from "astro:assets";
+import heroImage from "../assets/cover.jpg";
 import Link from "@components/ui/link.astro";
 import { Icon } from "astro-icon";
 ---
 
 <main
-  class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24">
+  class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24"
+>
   <div class="py-6 md:order-1 md:block">
     <Image
       src={heroImage}
@@ -18,35 +19,41 @@ import { Icon } from "astro-icon";
   </div>
   <div>
     <h1
-      class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
-      Marketing website done with Astro
+      class="text-2xl lg:text-3xl xl:text-5xl font-bold lg:tracking-tight xl:tracking-tighter"
+    >
+      One Stop Smart Classroom Solution for Private Schools
     </h1>
     <p class="text-lg mt-4 text-slate-600 max-w-xl">
-      Astroship is a starter template for startups, marketing websites & landing
-      pages.<wbr /> Built with Astro.build and TailwindCSS. You can quickly create
-      any website with this starter.
+      Ontum Education is a breath of fresh air in the world of ed-tech. <br />
+       We offer an exceptional and niche classroom product for private schools, <br
+      />
+       Ontum’s rich repository includes school certification, teacher training,
+      leadership <br />
+       training, curriculum planning, and activity-based learning.
     </p>
     <div class="mt-6 flex flex-col sm:flex-row gap-3">
       <Link
         href="#"
-        href="https://web3templates.com/templates/astroship-starter-website-template-for-astro"
+        href="https://app.ontum.co/"
         target="_blank"
         class="flex gap-1 items-center justify-center"
-        rel="noopener">
+        rel="noopener"
+      >
         <Icon class="text-white w-5 h-5" name="bx:bxs-cloud-download" />
 
-        Download for Free
+         Download for Free <span class="text-xl">📲</span>
       </Link>
-      <Link
+      <!-- <Link
         size="lg"
         style="outline"
         rel="noopener"
         href="https://github.com/surjithctly/astroship"
         class="flex gap-1 items-center justify-center"
-        target="_blank">
+        target="_blank"
+      >
         <Icon class="text-black w-4 h-4" name="bx:bxl-github" />
-        GitHub Repo
-      </Link>
+         GitHub Repo
+      </Link> -->
     </div>
   </div>
 </main>

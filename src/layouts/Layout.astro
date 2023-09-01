@@ -2,6 +2,8 @@
 import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
+import { ViewTransitions } from "astro:transitions";
+
 import "@fontsource-variable/inter/index.css";
 
 export interface Props {
@@ -22,7 +24,7 @@ const makeTitle = title
   : " Ontum Education";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -52,11 +54,12 @@ const makeTitle = title
         },
       }}
     />
+    <ViewTransitions />
   </head>
   <body>
     <Navbar />
     <div style="padding-top:90px;">
-     <slot />
+      <slot />
     </div>
     <Footer />
     <style is:global>
