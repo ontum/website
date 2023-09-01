@@ -170,10 +170,10 @@ const menuitems = [
 </script>
 
 <Container>
-  <div class="w-full flex justify-center" id="viewNavBar">
+  <div class="w-full flex justify-center">
     <header class="bg-white fixed shadow-sm rounded-lg w-full md:px-10 z-[500]">
       <div class="flex flex-col lg:flex-row justify-between items-center p-5">
-        <Astronav client:load transition:persist>
+        <Astronav transition:persist>
           <div class="flex w-full lg:w-auto items-center justify-between">
             <a href="/" class="text-lg flex">
               <Image
@@ -194,10 +194,7 @@ const menuitems = [
               <MenuIcon class="w-4 h-4 text-gray-800" />
             </div>
           </div>
-          <MenuItems
-            transition:persist
-            class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0"
-          >
+          <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
             <ul class="flex flex-col lg:flex-row lg:gap-3">
               {
                 menuitems.map((item, index) => (
@@ -215,6 +212,7 @@ const menuitems = [
                         <a
                           href={item.path}
                           class="flex lg:px-3 py-2 text-gray-600 hover:text-gray-900"
+                          data-astro-reload={item.title === "Contact"}
                         >
                           {item.title}
                         </a>
