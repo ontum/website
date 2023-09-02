@@ -172,8 +172,8 @@ const menuitems = [
 <Container>
   <div class="w-full flex justify-center">
     <header class="bg-white fixed shadow-sm rounded-lg w-full md:px-10 z-[500]">
-      <div class="flex flex-col lg:flex-row justify-between items-center p-5">
-        <Astronav transition:persist>
+      <div class="flex flex-col lg:flex-row justify-between items-center p-2">
+        <Astronav>
           <div class="flex w-full lg:w-auto items-center justify-between">
             <a href="/" class="text-lg flex">
               <Image
@@ -181,17 +181,17 @@ const menuitems = [
                 alt="Ontum Logo"
                 width="50"
                 height="50"
-                class="w-16 h-16"
+                class="w-12 h-12 md:w-16 md:h-16"
                 loading="eager"
               />
-              <div class="p-2">
-                <span class="font-bold text-ontum-blue text-xl">Ontum</span>
+              <div class="p-2 text-sm md:text-xl">
+                <span class="font-bold text-ontum-blue">Ontum</span>
                 <br />
                 <span class="text-slate-500">Education</span>
               </div>
             </a>
             <div class="block lg:hidden">
-              <MenuIcon class="w-4 h-4 text-gray-800" />
+              <MenuIcon class="w-6 h-6 text-gray-800 mr-5" />
             </div>
           </div>
           <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">

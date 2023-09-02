@@ -54,11 +54,10 @@ const makeTitle = title
         },
       }}
     />
-    <ViewTransitions />
-  </head>
-  <body>
+    <ViewTransitions fallback="animate" />
+  </head><body>
     <Navbar />
-    <div class="pt-[90px]">
+    <div class="pt-[40px] md:pt-[90px]">
       <slot />
     </div>
     <Footer />

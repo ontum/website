@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
@@ -38,13 +38,10 @@ publishedBlogEntries.sort(function (a, b) {
                     sizes="(max-width: 800px) 100vw, 800px"
                     width={430}
                     height={240}
-                    aspectRatio="16:9"
-                    background="#ffffff"
-                    fit="cover"
-                    position="center"
                     loading={index <= 2 ? "eager" : "lazy"}
                     decoding={index <= 2 ? "sync" : "async"}
                     class="w-full rounded-md"
+                    transition:name={blogPostEntry.slug}
                   />
                   <div>
                     <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
@@ -62,7 +59,8 @@ publishedBlogEntries.sort(function (a, b) {
                       <span class="text-gray-400">• </span>
                       <time
                         class="text-gray-400"
-                        datetime={blogPostEntry.data.publishDate.toISOString()}>
+                        datetime={blogPostEntry.data.publishDate.toISOString()}
+                      >
                         {blogPostEntry.data.publishDate.toDateString()}
                       </time>
                     </div>
