@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../assets/cover.jpg";
+import Link from "@components/ui/link.astro";
+import { Icon } from "astro-icon";
+const slides = [
+  {
+    name: "hello 1",
+  },
+  {
+    name: "hello 2",
+  },
+  {
+    name: "hello 3",
+  },
+];
+---
+
+<div
+  class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24 bg-ontum-blue3 px-10 mb-10 lg:px-18"
+>
+  <div class="p-6 md:mr-10">
+    <Image
+      src={heroImage}
+      alt="Astronaut in the air"
+      sizes="(max-width: 800px) 100vw, 620px"
+      loading="eager"
+      format="avif"
+      class="rounded-3xl"
+    />
+  </div>
+  <div>
+    <h1
+      class="text-2xl lg:text-3xl xl:text-4xl font-bold lg:tracking-tight xl:tracking-tighter"
+    >
+      One Stop Smart Classroom Solution for Private Schools
+    </h1>
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      Ontum Education is a breath of fresh air in the world of ed-tech. <br />
+       We offer an exceptional and niche classroom product for private schools, <br
+      />
+    </p>
+    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+      <Link
+        style="outline"
+        href="https://app.ontum.co/"
+        target="_blank"
+        class="flex gap-1 items-center justify-center"
+        rel="noopener"
+      >
+        Download for Free <span class="text-5xl">📲</span>
+      </Link>
+      <!-- <Link
+        size="lg"
+        style="outline"
+        rel="noopener"
+        href="https://github.com/surjithctly/astroship"
+        class="flex gap-1 items-center justify-center"
+        target="_blank" 
+      >
+        <Icon class="text-black w-4 h-4" name="bx:bxl-github" />
+         GitHub Repo
+      </Link> -->
+    </div>
+  </div>
+</div>
